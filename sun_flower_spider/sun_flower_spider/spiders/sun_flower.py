@@ -27,7 +27,8 @@ class SunFlowerSpider(scrapy.Spider):
             # 'http://wsjkw.hebei.gov.cn/syyctplj/375501.jhtml',
             # 'http://wsjkw.hebei.gov.cn/syyctplj/375548.jhtml',
             # 'http://wsjkw.hebei.gov.cn/syyctplj/375583.jhtml',
-            'http://wsjkw.hebei.gov.cn/syyctplj/375619.jhtml'
+            # 'http://wsjkw.hebei.gov.cn/syyctplj/375619.jhtml',
+            'http://wsjkw.hebei.gov.cn/syyctplj/375644.jhtml'
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -36,8 +37,8 @@ class SunFlowerSpider(scrapy.Spider):
         relative_path = "../data/sjz/"
         page = response.url.split("/")[-1].split(".")[0]
         filename = f'sjz-{page}.html'
-        with open(os.path.join(relative_path, filename), 'wb') as f:
-            f.write(response.body)
+        # with open(os.path.join(relative_path, filename), 'wb') as f:
+        #     f.write(response.body)
         title = response.xpath('/html/head/title/text()').extract_first()
         time_release = response.xpath('// *[ @ id = "container"] / div[3] / div / div[1] / span[1]/node()') \
             .extract_first()
